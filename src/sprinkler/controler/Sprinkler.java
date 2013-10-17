@@ -54,7 +54,7 @@ public class Sprinkler {
         this.ratio = ratio;
     }
     
-    public void sprincle() {        
+    public void sprinkle() {        
         //TODO
     }
 }
