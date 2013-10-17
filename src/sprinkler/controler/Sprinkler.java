@@ -4,24 +4,21 @@
  */
 package sprinkler.controler;
 
+import java.util.Objects;
+
 /**
  *
  * @author palmyman
  */
 public class Sprinkler {
-    private int id, range; //degrees of sprinkler range
-    private boolean grass; //true if placed on grass, false if placed on clay
-    private double ratio; // multiplyer to water some areas more then others
+    private int id, range; //degrees of sprinkler range    
     private ControlPanel parentPanel; //reference to parent panel
 
-    public Sprinkler(int id, ControlPanel parentPanel, int range, boolean grass, double ratio) {
-        if(range < 1) throw new IllegalArgumentException("Range can not be lower then one.");
-        if(ratio < 0) throw new IllegalArgumentException("Ratio must be double from N");
+    public Sprinkler(int id, ControlPanel parentPanel, int range, double ratio) {
+        if(range < 1 || range > 360) throw new IllegalArgumentException("Range must be int <1;360>."); 
         this.id = id;
         this.parentPanel = parentPanel;
         this.range = range;
-        this.grass = grass;
-        this.ratio = ratio;
     }
 
     public int getId() {
@@ -30,28 +27,46 @@ public class Sprinkler {
 
     public int getRange() {
         return range;
-    }    
-
-    public boolean isOnGrass() {
-        return grass;
-    }    
-
-    public double getRatio() {
-        return ratio;
     }
-
+    
     public int getParentPanelId() {
         return parentPanel.getId();
     }
 
     public void setRange(int range) {
-        if(range < 1) throw new IllegalArgumentException("Range can not be lower then one.");
+        if(range < 1 || range > 360) throw new IllegalArgumentException("Range must be int <1;360>.");
         this.range = range;
-    }    
+    }   
 
-    public void setRatio(double ratio) {
-        if(ratio < 0) throw new IllegalArgumentException("Ratio must be double from N");
-        this.ratio = ratio;
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.parentPanel);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sprinkler other = (Sprinkler) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.parentPanel, other.parentPanel)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Sprinkler{" + "id=" + id + ", range=" + range + ", parentPanelName=" + parentPanel.getName() + '}';
     }
     
     public void sprinkle() {        

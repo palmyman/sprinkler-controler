@@ -44,4 +44,12 @@ public class ControlPanel {
     public Set<Sprinkler> getSprinklers() {
         return sprinklers;
     }
+    
+    public boolean add(Sprinkler item) {
+        return this.sprinklers.add(item);        
+    }
+    
+    public boolean remove(Sprinkler item) {
+        return this.sprinklers.remove(item);
+    }
 }
