@@ -5,6 +5,7 @@
 package sprinkler.controler;
 
 import java.sql.Time;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,7 @@ public class Program {
         this.id = id;
         this.name = name;
         this.oneSpriklerTime = oneSpriklerTime;
+        this.sprinklers = new HashSet<>();
     }
     
     public boolean add(Sprinkler item) {

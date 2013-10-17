@@ -5,6 +5,7 @@
 package sprinkler.controler;
 
 import java.net.InetAddress;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -23,6 +24,7 @@ public class ControlPanel {
         this.name = name;
         this.panelIP = panelIP;
         this.sprinkling = false;
+        this.sprinklers = new HashSet<>();
     }   
 
     public int getId() {

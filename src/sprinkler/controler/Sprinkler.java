@@ -14,7 +14,7 @@ public class Sprinkler {
     private int id, range; //degrees of sprinkler range    
     private ControlPanel parentPanel; //reference to parent panel
 
-    public Sprinkler(int id, ControlPanel parentPanel, int range, double ratio) {
+    public Sprinkler(int id, ControlPanel parentPanel, int range) {
         if(range < 1 || range > 360) throw new IllegalArgumentException("Range must be int <1;360>."); 
         this.id = id;
         this.parentPanel = parentPanel;
@@ -70,6 +70,6 @@ public class Sprinkler {
     }
     
     public void sprinkle() {        
-        //TODO
+        System.out.println(this);
     }
 }
