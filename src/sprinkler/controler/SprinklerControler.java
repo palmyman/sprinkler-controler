@@ -20,13 +20,7 @@ public class SprinklerControler {
         Sprinkler ba2 = new Sprinkler(2, panelOne, 360);
         Sprinkler ba3 = new Sprinkler(3, panelOne, 360);
         Sprinkler ba4 = new Sprinkler(4, panelOne, 360);
-        Sprinkler ba5 = new Sprinkler(5, panelOne, 360);
-        
-        panelOne.add(ba1);
-        panelOne.add(ba2);
-        panelOne.add(ba3);
-        panelOne.add(ba4);
-        panelOne.add(ba5);
+        Sprinkler ba5 = new Sprinkler(5, panelOne, 360);        
         
         Program firstProgram = new Program(1, "base1", 30);
         

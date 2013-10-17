@@ -19,6 +19,7 @@ public class Sprinkler {
         this.id = id;
         this.parentPanel = parentPanel;
         this.range = range;
+        parentPanel.add(this);
     }
 
     public int getId() {
