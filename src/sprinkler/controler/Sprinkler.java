@@ -10,34 +10,28 @@ import java.util.Objects;
  *
  * @author palmyman
  */
-public class Sprinkler {
-    private int id, range; //degrees of sprinkler range    
-    private ControlPanel parentPanel; //reference to parent panel
+public class Sprinkler implements Comparable<Sprinkler> {
+    protected int id; //degrees of sprinkler time    
+    protected ControlPanel parentPanel; //reference to parent panel
 
-    public Sprinkler(int id, ControlPanel parentPanel, int range) {
-        if(range < 1 || range > 360) throw new IllegalArgumentException("Range must be int <1;360>."); 
+    public Sprinkler(int id, ControlPanel parentPanel) {        
         this.id = id;
-        this.parentPanel = parentPanel;
-        this.range = range;
+        this.parentPanel = parentPanel;        
         parentPanel.add(this);
+    }
+    
+    @Override
+    public int compareTo(Sprinkler other) {
+        return this.id - other.id;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getRange() {
-        return range;
+    public String getParentPanelName() {
+        return parentPanel.getName();
     }
-    
-    public int getParentPanelId() {
-        return parentPanel.getId();
-    }
-
-    public void setRange(int range) {
-        if(range < 1 || range > 360) throw new IllegalArgumentException("Range must be int <1;360>.");
-        this.range = range;
-    }   
 
     @Override
     public int hashCode() {
@@ -67,10 +61,18 @@ public class Sprinkler {
 
     @Override
     public String toString() {
-        return "Sprinkler{" + "id=" + id + ", range=" + range + ", parentPanelName=" + parentPanel.getName() + '}';
+        return "Sprinkler{" + "id=" + id + ", parentPanelName=" + parentPanel.getName() + '}';
     }
     
-    public void sprinkle() {        
+    public void sprinkle(int time) throws InterruptedException {
+        if(time < 1) throw new IllegalArgumentException("Time must be int from N.");
         System.out.println(this);
+        int counter = time;
+        while(counter > 0) {            
+            System.out.println(counter);            
+            Thread.sleep(500);
+            counter--;
+        }
+        System.out.println();
     }
 }

@@ -13,21 +13,22 @@ public class SprinklerControler {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        ControlPanel panelOne = new ControlPanel(1, "panelOne", null);
+    public static void main(String[] args) throws InterruptedException {
+        ControlPanel panelOne = new ControlPanel("panelOne", null);
         
-        Sprinkler ba1 = new Sprinkler(1, panelOne, 360);
-        Sprinkler ba2 = new Sprinkler(2, panelOne, 360);
-        Sprinkler ba3 = new Sprinkler(3, panelOne, 360);
-        Sprinkler ba4 = new Sprinkler(4, panelOne, 360);
-        Sprinkler ba5 = new Sprinkler(5, panelOne, 360);        
+        Sprinkler ba1 = new Sprinkler(1, panelOne);
+        Sprinkler ba2 = new Sprinkler(2, panelOne);
+        Sprinkler ba3 = new Sprinkler(3, panelOne);
+        Sprinkler ba4 = new Sprinkler(4, panelOne);
+        Sprinkler ba5 = new Sprinkler(5, panelOne);        
         
-        Program firstProgram = new Program(1, "base1", 30);
+        Program firstProgram = new Program(1, "base1");
         
-        firstProgram.add(ba1);
-        firstProgram.add(ba2);
-        firstProgram.add(ba3);
-        firstProgram.add(ba4);
+        TimedSprinkler abs1 = new TimedSprinkler(ba1, 10, firstProgram);
+        TimedSprinkler abs2 = new TimedSprinkler(ba2, 10, firstProgram);
+        TimedSprinkler abs3 = new TimedSprinkler(ba3, 10, firstProgram);
+        TimedSprinkler abs4 = new TimedSprinkler(ba4, 10, firstProgram);
+        TimedSprinkler abs5 = new TimedSprinkler(ba5, 10, firstProgram);
         
         firstProgram.runProgram();
     }

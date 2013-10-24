@@ -4,34 +4,34 @@
  */
 package sprinkler.controler;
 
-import java.sql.Time;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  *
  * @author palmyman
  */
-public class Program {
+public class Program implements Comparable<Program> {
     private int id;
     private String name;
-    private Set<Sprinkler> sprinklers;
-    private long oneSpriklerTime;
+    private SortedSet<TimedSprinkler> sprinklers;    
 
-    public Program(int id, String name, long oneSpriklerTime) {
+    public Program(int id, String name) {
         this.id = id;
-        this.name = name;
-        this.oneSpriklerTime = oneSpriklerTime;
-        this.sprinklers = new HashSet<>();
+        this.name = name;        
+        this.sprinklers = new TreeSet<>();
+    }
+        
+    @Override
+    public int compareTo(Program other) {
+        return this.name.compareTo(other.name);
     }
     
-    public boolean add(Sprinkler item) {
+    public boolean add(TimedSprinkler item) {
         return this.sprinklers.add(item);        
     }
     
-    public boolean remove(Sprinkler item) {
+    public boolean remove(TimedSprinkler item) {
         return this.sprinklers.remove(item);
     }
 
@@ -43,28 +43,16 @@ public class Program {
         return name;
     }
 
-    public Set<Sprinkler> getSprinklers() {
+    public SortedSet<TimedSprinkler> getSprinklers() {
         return sprinklers;
-    }
-
-    public long getOneSpriklerTime() {
-        return oneSpriklerTime;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    }    
 
     public void setName(String name) {
         this.name = name;
     }
-
-    public void setOneSpriklerTime(long oneSpriklerTime) {
-        this.oneSpriklerTime = oneSpriklerTime;
-    }
     
-    public void runProgram() {
-        for (Sprinkler sprinkler : this.sprinklers) {
+    public void runProgram() throws InterruptedException {
+        for (TimedSprinkler sprinkler : this.sprinklers) {
             sprinkler.sprinkle();
         }
     }
