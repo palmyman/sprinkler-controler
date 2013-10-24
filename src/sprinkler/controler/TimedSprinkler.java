@@ -10,11 +10,10 @@ package sprinkler.controler;
  */
 public class TimedSprinkler extends Sprinkler {
     private int time;
-    public TimedSprinkler(Sprinkler sprinkler, int time, Program program) {        
+    public TimedSprinkler(Sprinkler sprinkler, int time) {        
         super(sprinkler.id, sprinkler.parentPanel);
         if(time < 1) throw new IllegalArgumentException("Time must be int from N.");
-        this.time = time;
-        program.add(this);
+        this.time = time;        
     }
     
     public void sprinkle() throws InterruptedException {

@@ -27,8 +27,12 @@ public class Program implements Comparable<Program> {
         return this.name.compareTo(other.name);
     }
     
-    public boolean add(TimedSprinkler item) {
+    public boolean addOld(TimedSprinkler item) {
         return this.sprinklers.add(item);        
+    }
+    
+    public boolean add(ControlPanel parentPanel, int sprinklerId, int time) {                
+        return this.sprinklers.add(new TimedSprinkler(parentPanel.getSprinklerById(sprinklerId), time));
     }
     
     public boolean remove(TimedSprinkler item) {

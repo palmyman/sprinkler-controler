@@ -17,8 +17,7 @@ public class Sprinkler implements Comparable<Sprinkler> {
 
     public Sprinkler(int id, ControlPanel parentPanel) {
         this.id = id;
-        this.parentPanel = parentPanel;
-        parentPanel.add(this);
+        this.parentPanel = parentPanel;        
     }
 
     @Override
@@ -36,6 +35,10 @@ public class Sprinkler implements Comparable<Sprinkler> {
 
     public String getParentPanelName() {
         return parentPanel.getName();
+    }
+
+    public void setParentPanel(ControlPanel parentPanel) {
+        this.parentPanel = parentPanel;
     }
 
     @Override
