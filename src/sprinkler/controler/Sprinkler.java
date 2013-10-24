@@ -11,18 +11,23 @@ import java.util.Objects;
  * @author palmyman
  */
 public class Sprinkler implements Comparable<Sprinkler> {
+
     protected int id; //degrees of sprinkler time    
     protected ControlPanel parentPanel; //reference to parent panel
 
-    public Sprinkler(int id, ControlPanel parentPanel) {        
+    public Sprinkler(int id, ControlPanel parentPanel) {
         this.id = id;
-        this.parentPanel = parentPanel;        
+        this.parentPanel = parentPanel;
         parentPanel.add(this);
     }
-    
+
     @Override
     public int compareTo(Sprinkler other) {
-        return this.id - other.id;
+        if (this.parentPanel.getName() == other.parentPanel.getName()) {
+            return this.id - other.id;
+        }
+        return this.parentPanel.getName().compareTo(other.parentPanel.getName());
+
     }
 
     public int getId() {
@@ -63,13 +68,15 @@ public class Sprinkler implements Comparable<Sprinkler> {
     public String toString() {
         return "Sprinkler{" + "id=" + id + ", parentPanelName=" + parentPanel.getName() + '}';
     }
-    
+
     public void sprinkle(int time) throws InterruptedException {
-        if(time < 1) throw new IllegalArgumentException("Time must be int from N.");
+        if (time < 1) {
+            throw new IllegalArgumentException("Time must be int from N.");
+        }
         System.out.println(this);
         int counter = time;
-        while(counter > 0) {            
-            System.out.println(counter);            
+        while (counter > 0) {
+            System.out.println(counter);
             Thread.sleep(500);
             counter--;
         }
