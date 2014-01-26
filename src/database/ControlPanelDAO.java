@@ -6,7 +6,7 @@ package database;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import sprinkler.controler.ControlPanel;
+import model.ControlPanel;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.Date;
@@ -28,13 +28,14 @@ public class ControlPanelDAO {
     private Connection conn;
     private PreparedStatement psCreate;
     private PreparedStatement psGetAll;
+    private PreparedStatement psGetOne;
     private static ControlPanelDAO instance = new ControlPanelDAO();
     
     public static ControlPanelDAO getInstance() {
         return instance;
     }
     
-    private ControlPanelDAO() {
+    ControlPanelDAO() {
         try {
             conn = DriverManager.getConnection("jdbc:derby:/home/palmyman/derby;  create=true");
             DatabaseMetaData md = conn.getMetaData();
@@ -49,6 +50,7 @@ public class ControlPanelDAO {
             }
             psCreate = conn.prepareStatement("INSERT INTO CONTROL_PANEL VALUES(DEFAULT, ?, ?, ?)");
             psGetAll = conn.prepareStatement("SELECT * FROM CONTROL_PANEL");
+            psGetOne = conn.prepareStatement("SELECT * FROM CONTROL_PANEL WHERE ID=?");
 
         } catch (SQLException ex) {
             Logger.getLogger(ControlPanelDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,11 +71,29 @@ public class ControlPanelDAO {
             int id = rs.getInt(1);
             String name = rs.getString(2);
             String host = rs.getString(3);
-            InetAddress ip;
-            ip = InetAddress.getByName(host);
+            //InetAddress ip;
+            //ip = InetAddress.getByName(host);
             int count = rs.getInt(4);            
-            panels.add(new ControlPanel(id, name, ip, count));
+            panels.add(new ControlPanel(id, name, host, count));
         }
         return panels;
+    }
+    
+    public ControlPanel getOne(int id) throws SQLException, UnknownHostException {
+        psGetOne.setInt(1, id);
+        ResultSet rs = psGetOne.executeQuery();
+        ControlPanel panel;
+        if(rs.next()) {            
+            String name = rs.getString(2);
+            String host = rs.getString(3);
+            //InetAddress ip;
+            //ip = InetAddress.getByName(host);
+            int count = rs.getInt(4);
+            panel = new ControlPanel(id, name, host, count);
+        } else {
+            panel = null;
+        }
+        
+        return panel;
     }
 }

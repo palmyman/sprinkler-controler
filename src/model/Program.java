@@ -2,18 +2,20 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sprinkler.controler;
+package model;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author palmyman
  */
-public class Program implements Comparable<Program> {
+public class Program implements Runnable {
     private int id;
     private String name;
     private Date date;
@@ -35,18 +37,9 @@ public class Program implements Comparable<Program> {
     public Time getTime() {
         return time;
     }
-        
-    @Override
-    public int compareTo(Program other) {
-        return this.name.compareTo(other.name);
-    }
     
-    public boolean addOld(TimedSprinkler item) {
+    public boolean add(TimedSprinkler item) {
         return this.sprinklers.add(item);        
-    }
-    
-    public boolean add(ControlPanel parentPanel, int sprinklerId, int time) {                
-        return this.sprinklers.add(new TimedSprinkler(parentPanel.getSprinklerById(sprinklerId), time));
     }
     
     public boolean remove(TimedSprinkler item) {
@@ -72,6 +65,22 @@ public class Program implements Comparable<Program> {
     public void runProgram() throws InterruptedException {
         for (TimedSprinkler sprinkler : this.sprinklers) {
             sprinkler.sprinkle();
+        }
+    }
+            
+//    @Override
+//    public int compareTo(Program other) {
+//        return this.name.compareTo(other.name);
+//    }
+
+    @Override
+    public void run() {
+        for (TimedSprinkler sprinkler : this.sprinklers) {
+            try {
+                sprinkler.sprinkle();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

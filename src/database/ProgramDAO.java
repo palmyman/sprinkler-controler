@@ -18,8 +18,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sprinkler.controler.Program;
-import sprinkler.controler.TimedSprinkler;
+import model.Program;
+import model.Sprinkler;
+import model.TimedSprinkler;
 
 /**
  *
@@ -29,8 +30,10 @@ public class ProgramDAO {
     private Connection conn;
     private PreparedStatement psCreate;
     private PreparedStatement psGetAll;
+    private PreparedStatement psGetOne;
     private PreparedStatement psAddSprinkler;
     private PreparedStatement psGetSprinklers;
+    private PreparedStatement psGetSprinklersById;
     private static ProgramDAO instance = new ProgramDAO();
     
     public static ProgramDAO getInstance() {
@@ -64,6 +67,7 @@ public class ProgramDAO {
             }
             psAddSprinkler = conn.prepareStatement("INSERT INTO TIMED_SPRINKLER VALUES(?, ?, ?, ?)");
             psGetSprinklers = conn.prepareStatement("SELECT * FROM TIMED_SPRINKLER");
+            psGetSprinklersById = conn.prepareStatement("SELECT * FROM TIMED_SPRINKLER WHERE PROGRAM_ID = ?");
 
         } catch (SQLException ex) {
             Logger.getLogger(ControlPanelDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,16 +89,48 @@ public class ProgramDAO {
             String name = rs.getString(2);
             Date date = rs.getDate(3);
             Time time = rs.getTime(4);
-            programs.add(new Program(id, name, date, time));
+            Program program = new Program(id, name, date, time);
+            Collection<TimedSprinkler> timedSprinklers = new ArrayList<>();
+            timedSprinklers = getSprinklers(rs.getInt(1));
+            for(TimedSprinkler sprinkler : timedSprinklers) {
+                program.add(sprinkler);
+            }
+            programs.add(program);
         }
         return programs;
+    }    
+
+    public void addSprinkler(TimedSprinkler sprinkler) throws SQLException {        
+        psCreate.setInt(1, sprinkler.getParentPanelId());
+        psCreate.setInt(2, sprinkler.getParentProgramId());
+        psCreate.setInt(3, sprinkler.getId());
+        psCreate.setInt(4, sprinkler.getTime());
+        psCreate.execute();
     }
     
-    public void addSprinkler(TimedSprinkler sprinkler) throws SQLException {        
-        psCreate.setInt(1, sprinkler.getParentPanel().getId());
-        psCreate.setInt(2, sprinkler.getParentProgram().getId());
-        psCreate.setInt(3, sprinkler.getId());
-        psCreate.setInt(3, sprinkler.getTime());
-        psCreate.execute();
+    public Collection<TimedSprinkler> getSprinklers() throws SQLException {
+        ResultSet rs = psGetSprinklers.executeQuery();
+        Collection<TimedSprinkler> sprinklers = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            int programId = rs.getInt(2);
+            int panelId = rs.getInt(3);
+            int time = rs.getInt(4);            
+            sprinklers.add(new TimedSprinkler(new Sprinkler(id, panelId), programId, time));
+        }
+        return sprinklers;
+    }
+    
+    public Collection<TimedSprinkler> getSprinklers(int programId) throws SQLException {
+        psGetSprinklersById.setInt(1, programId);
+        ResultSet rs = psGetSprinklersById.executeQuery();
+        Collection<TimedSprinkler> sprinklers = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt(1);            
+            int panelId = rs.getInt(3);
+            int time = rs.getInt(4);            
+            sprinklers.add(new TimedSprinkler(new Sprinkler(id, panelId), programId, time));
+        }
+        return sprinklers;
     }
 }
