@@ -29,6 +29,10 @@ public class Sprinkler implements Comparable<Sprinkler> {
 
     }
 
+    public ControlPanel getParentPanel() {
+        return parentPanel;
+    }
+
     public int getId() {
         return id;
     }

@@ -4,6 +4,8 @@
  */
 package sprinkler.controler;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -14,12 +16,24 @@ import java.util.TreeSet;
 public class Program implements Comparable<Program> {
     private int id;
     private String name;
+    private Date date;
+    private Time time;
     private SortedSet<TimedSprinkler> sprinklers;    
 
-    public Program(int id, String name) {
+    public Program(int id, String name, Date date, Time time) {
         this.id = id;
-        this.name = name;        
+        this.name = name;
+        this.date = date;
+        this.time = time;
         this.sprinklers = new TreeSet<>();
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Time getTime() {
+        return time;
     }
         
     @Override
