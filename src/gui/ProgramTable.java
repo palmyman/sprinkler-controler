@@ -4,25 +4,25 @@
  */
 package gui;
 
-import database.ControlPanelDAO;
-import java.net.UnknownHostException;
-import model.ControlPanel;
+import database.ProgramDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
+import model.Program;
 
 /**
  *
- * @author danecek
+ * @author palmyman
  */
-class PanelsModel extends AbstractTableModel {
+class ProgramTable extends AbstractTableModel {
 
-    List<ControlPanel> panels;
+    List<Program> programs;
 
-    public PanelsModel() throws UnknownHostException {
+    public ProgramTable() {
         refresh();
+        
     }
 
     @Override
@@ -30,8 +30,8 @@ class PanelsModel extends AbstractTableModel {
         switch (col) {
             case 0: return "Id";
             case 1: return "Name";
-            case 2: return "SprinklerCount";
-                
+            case 2: return "Date";
+            case 3: return "Time";                
         }
         return null;
     }
@@ -40,31 +40,33 @@ class PanelsModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return panels.size();
+        return programs.size();
     }
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
     public Object getValueAt(int row, int col) {
-        ControlPanel p = panels.get(row);
+        Program p = programs.get(row);
         switch (col) {
             case 0:
                 return p.getId();
             case 1:
                 return p.getName();
             case 2:
-                return p.getSprinklerCount();
+                return p.getDate();
+            case 3:
+                return p.getTime();
         }
         return null;
     }
     
-    public void refresh() throws UnknownHostException {
+    public void refresh() {
         try {
-            panels =  new ArrayList<>(ControlPanelDAO.getInstance().getALL());
+            programs =  new ArrayList<>(ProgramDAO.getInstance().getAll());
             fireTableDataChanged();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString());

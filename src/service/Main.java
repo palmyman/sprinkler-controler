@@ -4,10 +4,7 @@
  */
 package service;
 
-import database.ControlPanelDAO;
 import gui.MainFrame;
-import java.net.UnknownHostException;
-import java.sql.SQLException;
 
 /**
  *
@@ -17,8 +14,9 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws UnknownHostException, SQLException {
-        ControlPanelDAO.getInstance().create(new model.ControlPanel(1, "ahoj", null, 22));
-        new MainFrame();
+    public static void main(String[] args) {
+        MainFrame mainFrame = new MainFrame();
+        mainFrame.setLocation(100, 100);
+        mainFrame.setVisible(true);
     }
 }

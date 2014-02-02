@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Sun Jan 26 18:23:00 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0143-cf93-65e0-00000707af30 
-on database directory /home/palmyman/derby with class loader sun.misc.Launcher$AppClassLoader@713c817 
+Sun Feb 02 23:21:19 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0143-f4b1-0883-000006c82fd0 
+on database directory /tmp/sprinkler with class loader sun.misc.Launcher$AppClassLoader@713c817 
 Loaded from file:/home/palmyman/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_51-b13

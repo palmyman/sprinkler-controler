@@ -4,8 +4,6 @@
  */
 package model;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Objects;
 
 /**
@@ -16,37 +14,37 @@ public class ControlPanel implements Comparable<ControlPanel> {
 
     private int id;
     private String name;
-    private InetAddress panelIP;
+    private String panelIP;
     private int sprinklerCount;
 
     public int getSprinklerCount() {
         return sprinklerCount;
     }
 
-    public ControlPanel(int id, String name, String host, int sprinklerCount) throws UnknownHostException {
+    public ControlPanel(int id, String name, String host, int sprinklerCount) {
         this.id = id;
         this.name = name;
-        this.panelIP = InetAddress.getByName(host);
+        this.panelIP = host;
         this.sprinklerCount = sprinklerCount;
+    }
+
+    public String getPanelIP() {
+        return panelIP;
     }
 
     public int getId() {
         return id;
-    }    
+    }
 
     public String getName() {
         return name;
     }
 
-    public InetAddress getPanelIP() {
-        return panelIP;
-    }
-    
     @Override
     public int compareTo(ControlPanel other) {
         return this.name.compareTo(other.name);
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
