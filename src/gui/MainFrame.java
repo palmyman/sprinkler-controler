@@ -4,11 +4,20 @@
  */
 package gui;
 
+import database.ProgramDAO;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import model.Program;
 import service.Scheduler;
 
 /**
@@ -21,6 +30,7 @@ public class MainFrame extends javax.swing.JFrame {
     private PanelTableModel panelTableModel;
     private DefaultListModel logListModel;
     private Scheduler scheduler;
+    private Timer timer;
 
     /**
      * Creates new form MainFrame
@@ -30,8 +40,37 @@ public class MainFrame extends javax.swing.JFrame {
         programTable.setModel(programTableModel = new ProgramTableModel());
         panelTable.setModel(panelTableModel = new PanelTableModel());
         logList.setModel(logListModel = new DefaultListModel());
-        addToLog("Program started");
-        scheduler = new Scheduler(this);
+        addToLog("Sprinkler Controler launched");
+        timer = new Timer();
+        initTimer();        
+    }
+
+    protected void initTimer() {
+        Set<Program> programs;
+        Program programToRun;
+        try {
+            programs = new TreeSet<>(ProgramDAO.getInstance().getUpcoming());
+            for (Program program : programs) {
+                programToRun = new Program(program.getId(), program.getName(), program.getDate(), program.getTime());
+                addToLog("Next Program is " + programToRun.getName());
+
+                scheduler = new Scheduler(this, programToRun);
+                Calendar dateCal = Calendar.getInstance();
+                dateCal.setTime(programToRun.getDate());
+                Calendar timeCal = Calendar.getInstance();
+                timeCal.setTime(programToRun.getTime());
+
+                dateCal.set(Calendar.HOUR_OF_DAY, timeCal.get(Calendar.HOUR_OF_DAY));
+                dateCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
+                dateCal.set(Calendar.SECOND, timeCal.get(Calendar.SECOND));
+
+                Date when = dateCal.getTime();
+                timer.schedule(scheduler, when);
+                break;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Scheduler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void refreshProgramTable() {
@@ -197,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 4, Short.MAX_VALUE))
                     .addComponent(jScrollPane3))
                 .addContainerGap())
         );
@@ -214,7 +253,7 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 refreshProgramTable();
-                scheduler.update();
+                initTimer();
             }
         });
     }//GEN-LAST:event_newProgramActionPerformed
@@ -227,7 +266,7 @@ public class MainFrame extends javax.swing.JFrame {
         newPanelDialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                refreshPanelTable();                
+                refreshPanelTable();
             }
         });
     }//GEN-LAST:event_newPanelActionPerformed
@@ -240,7 +279,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelEditorDialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                refreshPanelTable();                
+                refreshPanelTable();
             }
         });
     }//GEN-LAST:event_panelEditorActionPerformed
@@ -254,7 +293,7 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 refreshProgramTable();
-                scheduler.update();
+                initTimer();
             }
         });
     }//GEN-LAST:event_programEditorActionPerformed
@@ -298,7 +337,7 @@ public class MainFrame extends javax.swing.JFrame {
                 mainFrame.setVisible(true);
                 //new MainFrame().setVisible(true);
             }
-        });        
+        });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu helpMenu;

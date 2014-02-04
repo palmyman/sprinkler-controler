@@ -4,79 +4,54 @@
  */
 package service;
 
-import database.ProgramDAO;
+import database.SprinklerDAO;
 import gui.MainFrame;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Program;
+import model.TimedSprinkler;
 
 /**
  *
  * @author palmyman
  */
-public class Scheduler extends Thread {
+public class Scheduler extends TimerTask {
 
-    private Program programToRun;    
+    private Program programToRun;
     private MainFrame mainFrame;
-    private boolean terminate;
 
-    public Scheduler(MainFrame mainFrame) {
-        super("Scheduler");
+    public Scheduler(MainFrame mainFrame, Program program) {
         this.mainFrame = mainFrame;
-        this.terminate = false;
-        this.programToRun = new Program(
-                0,
-                "Unknow", 
-                new java.sql.Date(new Date(0).getTime()), 
-                new java.sql.Time(((java.util.Date) new Date(0)).getTime()));
-        update();
-        start();
+        this.programToRun = program;
     }
-
-    public void update() {
-        //programToRun = null;
-        Set<Program> programs;
+    
+    private void runProgram() {        
+        //Set<TimedSprinkler>sprinklers = programToRun.getSprinklers();
+        List<TimedSprinkler>sprinklers;
         try {
-            programs = new TreeSet<>(ProgramDAO.getInstance().getAll());
-            Program nowProgram = new Program(
-                0,
-                "Unknow", 
-                new java.sql.Date(new Date(0).getTime()), 
-                new java.sql.Time(((java.util.Date) new Date(0)).getTime()));
-            for (Program program : programs) {                
-                if (program.compareTo(nowProgram) > 0) {
-                    continue;
-                }
-                if (!programToRun.equals(program)) {                
-                    programToRun = new Program(program.getId(), program.getName(), program.getDate(), program.getTime());
-                    mainFrame.addToLog("Next Program is " + programToRun.getName());
-                    break;
-                }                
+            sprinklers = new ArrayList<>(SprinklerDAO.getInstance().getByProgramId(programToRun.getId()));
+            for (TimedSprinkler sprinkler : sprinklers) {
+            try {
+                mainFrame.addToLog("Starting sprinkler " + sprinkler.getIndex() + " at Control Panel " + sprinkler.getParentPanelId());
+                sprinkler.sprinkle();
+                mainFrame.addToLog("Stoping sprinkler " + sprinkler.getIndex() + " at Control Panel " + sprinkler.getParentPanelId());
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Scheduler.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         } catch (SQLException ex) {
             Logger.getLogger(Scheduler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        }        
     }
 
-    public void stopScheduler() {
-        terminate = true;
-    }
-
+    @Override
     public void run() {
-        Date dateTime = new Date(programToRun.getDate().getTime() + programToRun.getTime().getTime());
-        while (!terminate) {
-            if(dateTime.after(new Date()))
-                new ProgramRun(mainFrame, programToRun);
-            try {                
-                sleep(500);                
-            } catch (InterruptedException e) {
-            }
-        }
+        mainFrame.addToLog("Starting Program " + programToRun.getName());
+        runProgram();
+        mainFrame.addToLog("Program " + programToRun.getName() + " finished");
     }
 }

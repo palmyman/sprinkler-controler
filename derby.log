@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Tue Feb 04 03:12:47 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0143-faab-4e66-000006ad9260 
-on database directory /tmp/sprinkler-controler-db with class loader sun.misc.Launcher$AppClassLoader@530f243b 
-Loaded from file:/home/palmyman/derby.jar
+Tue Feb 04 11:21:26 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0143-fc6a-af71-000006ad21b8 
+on database directory /tmp/sprinkler-controler-db with class loader sun.misc.Launcher$AppClassLoader@713c817 
+Loaded from file:/home/palmyman/Github/sprinkler-controler/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_51-b13
 user.dir=/home/palmyman/Github/sprinkler-controler
