@@ -7,8 +7,8 @@ package database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Sprinkler;
@@ -52,9 +52,9 @@ public class SprinklerDAO extends DAO {
         psDelete.execute();
     }
     
-    public Collection<TimedSprinkler> getAll() throws SQLException {
+    public Set<TimedSprinkler> getAll() throws SQLException {
         ResultSet rs = psGetAll.executeQuery();
-        Collection<TimedSprinkler> sprinklers = new ArrayList<>();
+        Set<TimedSprinkler> sprinklers = new TreeSet<>();
         while (rs.next()) {
             int id = rs.getInt(1);
             int programId = rs.getInt(2);
@@ -66,10 +66,10 @@ public class SprinklerDAO extends DAO {
         return sprinklers;
     }
     
-    public Collection<TimedSprinkler> getByProgramId(int programId) throws SQLException {
+    public Set<TimedSprinkler> getByProgramId(int programId) throws SQLException {
         psGetByProgramId.setInt(1, programId);
         ResultSet rs = psGetByProgramId.executeQuery();
-        Collection<TimedSprinkler> sprinklers = new ArrayList<>();
+        Set<TimedSprinkler> sprinklers = new TreeSet<>();
         while (rs.next()) {
             int id = rs.getInt(1);            
             int panelId = rs.getInt(3);

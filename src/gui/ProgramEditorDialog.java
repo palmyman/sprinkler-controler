@@ -326,6 +326,7 @@ public class ProgramEditorDialog extends javax.swing.JDialog {
         addButton.setEnabled(true);
         rescheduleButton.setEnabled(true);
         deleteProgramButton.setEnabled(true);
+        deleteSprinklerButton.setEnabled(false);
         dateValue.setDate(((Program) programComboBox.getSelectedItem()).getDate());
         timeValue.setValue(((Program) programComboBox.getSelectedItem()).getTime());
         programId = ((Program) programComboBox.getSelectedItem()).getId();

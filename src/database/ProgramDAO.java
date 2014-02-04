@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Program;
@@ -60,9 +62,9 @@ public class ProgramDAO extends DAO {
         psDelete.execute();
     }
     
-    public Collection<Program> getAll() throws SQLException {
+    public Set<Program> getAll() throws SQLException {
         ResultSet rs = psGetAll.executeQuery();
-        Collection<Program> programs = new ArrayList<>();
+        Set<Program> programs = new TreeSet<>();
         while (rs.next()) {
             int id = rs.getInt(1);
             String name = rs.getString(2);

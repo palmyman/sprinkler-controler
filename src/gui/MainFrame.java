@@ -20,6 +20,7 @@ public class MainFrame extends javax.swing.JFrame {
     private ProgramTableModel programTableModel;
     private PanelTableModel panelTableModel;
     private DefaultListModel logListModel;
+    private Scheduler scheduler;
 
     /**
      * Creates new form MainFrame
@@ -29,8 +30,8 @@ public class MainFrame extends javax.swing.JFrame {
         programTable.setModel(programTableModel = new ProgramTableModel());
         panelTable.setModel(panelTableModel = new PanelTableModel());
         logList.setModel(logListModel = new DefaultListModel());
-        this.addToLog("Program started");
-        new Scheduler(this);
+        addToLog("Program started");
+        scheduler = new Scheduler(this);
     }
 
     public void refreshProgramTable() {
@@ -75,7 +76,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelEditor = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sprinkler Controler");
 
         jLabel1.setText("Scheduled programs:");
@@ -213,6 +214,7 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 refreshProgramTable();
+                scheduler.update();
             }
         });
     }//GEN-LAST:event_newProgramActionPerformed
@@ -225,7 +227,7 @@ public class MainFrame extends javax.swing.JFrame {
         newPanelDialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                refreshPanelTable();
+                refreshPanelTable();                
             }
         });
     }//GEN-LAST:event_newPanelActionPerformed
@@ -238,7 +240,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelEditorDialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                refreshPanelTable();
+                refreshPanelTable();                
             }
         });
     }//GEN-LAST:event_panelEditorActionPerformed
@@ -252,6 +254,7 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 refreshProgramTable();
+                scheduler.update();
             }
         });
     }//GEN-LAST:event_programEditorActionPerformed
@@ -291,9 +294,11 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainFrame().setVisible(true);
+                MainFrame mainFrame = new MainFrame();
+                mainFrame.setVisible(true);
+                //new MainFrame().setVisible(true);
             }
-        });
+        });        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu helpMenu;

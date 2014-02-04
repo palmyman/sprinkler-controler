@@ -4,12 +4,12 @@
  */
 package database;
 
-import java.sql.PreparedStatement;
 import model.ControlPanel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,7 +62,7 @@ public class ControlPanelDAO extends DAO {
 
     public Collection<ControlPanel> getAll() throws SQLException {
         ResultSet rs = psGetAll.executeQuery();
-        Collection<ControlPanel> panels = new ArrayList<>();
+        Set<ControlPanel> panels = new TreeSet<>();
         while (rs.next()) {
             int id = rs.getInt(1);
             String name = rs.getString(2);

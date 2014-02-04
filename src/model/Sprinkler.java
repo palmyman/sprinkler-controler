@@ -70,11 +70,7 @@ public class Sprinkler implements Comparable<Sprinkler> {
         return "Sprinkler{" + "id=" + index + ", parentPanelId=" + parentPanelId + '}';
     }
 
-    public void sprinkle(int time) throws InterruptedException {
-        if (time < 1) {
-            throw new IllegalArgumentException("Time must be int from N.");
-        }
-        System.out.println(this + "sprinkling for" + time + "s");       
-        Thread.sleep(time * 1000);
+    public void sprinkle(int duration) throws InterruptedException {                       
+        Thread.sleep(duration * 1000);
     }
 }

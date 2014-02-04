@@ -6,6 +6,7 @@ package model;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Level;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author palmyman
  */
-public class Program implements Runnable {
+public class Program implements Comparable<Program> {
     private int id;
     private String name;
     private Date date;
@@ -50,6 +51,29 @@ public class Program implements Runnable {
         return id;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this.date);
+        hash = 61 * hash + Objects.hashCode(this.time);
+        return hash;
+    }
+
+    public boolean equals(Program obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Program other = (Program) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
     public String getName() {
         return name;
     }
@@ -72,20 +96,12 @@ public class Program implements Runnable {
             sprinkler.sprinkle();
         }
     }
-            
-//    @Override
-//    public int compareTo(Program other) {
-//        return this.name.compareTo(other.name);
-//    }
 
     @Override
-    public void run() {
-        for (TimedSprinkler sprinkler : this.sprinklers) {
-            try {
-                sprinkler.sprinkle();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+    public int compareTo(Program other) {
+        Date dateTime = new Date(this.getDate().getTime() + this.getTime().getTime());
+        Date dateTimeOther = new Date(other.getDate().getTime() + other.getTime().getTime());
+        return dateTime.compareTo(dateTimeOther);
     }
+
 }
