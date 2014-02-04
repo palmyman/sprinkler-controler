@@ -9,6 +9,7 @@ import gui.MainFrame;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,9 +43,13 @@ public class Scheduler extends Thread {
         Set<Program> programs;
         try {
             programs = new TreeSet<>(ProgramDAO.getInstance().getAll());
-            for (Program program : programs) {
-                Date dateTime = new Date(program.getDate().getTime() + program.getTime().getTime());
-                if (dateTime.before(new Date())) {
+            Program nowProgram = new Program(
+                0,
+                "Unknow", 
+                new java.sql.Date(new Date(0).getTime()), 
+                new java.sql.Time(((java.util.Date) new Date(0)).getTime()));
+            for (Program program : programs) {                
+                if (program.compareTo(nowProgram) > 0) {
                     continue;
                 }
                 if (!programToRun.equals(program)) {                
@@ -69,7 +74,7 @@ public class Scheduler extends Thread {
             if(dateTime.after(new Date()))
                 new ProgramRun(mainFrame, programToRun);
             try {                
-                sleep(100);                
+                sleep(500);                
             } catch (InterruptedException e) {
             }
         }
