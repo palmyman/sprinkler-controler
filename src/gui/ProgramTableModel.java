@@ -16,13 +16,12 @@ import model.Program;
  *
  * @author palmyman
  */
-class ProgramTable extends AbstractTableModel {
+class ProgramTableModel extends AbstractTableModel {
 
     List<Program> programs;
 
-    public ProgramTable() {
-        refresh();
-        
+    public ProgramTableModel() {
+        refresh();        
     }
 
     @Override

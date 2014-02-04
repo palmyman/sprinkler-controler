@@ -10,11 +10,11 @@ package model;
  */
 public class Sprinkler implements Comparable<Sprinkler> {
 
-    protected int id;
+    protected int index;
     protected int parentPanelId;
 
-    public Sprinkler(int id, int parentPanelId) {
-        this.id = id;
+    public Sprinkler(int index, int parentPanelId) {
+        this.index = index;
         this.parentPanelId = parentPanelId;        
     }
 
@@ -25,7 +25,7 @@ public class Sprinkler implements Comparable<Sprinkler> {
     @Override
     public int compareTo(Sprinkler other) {
         if (this.parentPanelId == other.parentPanelId) {
-            return this.id - other.id;
+            return this.index - other.index;
         }
         return this.parentPanelId - other.parentPanelId;
 
@@ -35,14 +35,14 @@ public class Sprinkler implements Comparable<Sprinkler> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int getId() {
-        return id;
+    public int getIndex() {
+        return index;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.id;
+        hash = 79 * hash + this.index;
         hash = 79 * hash + this.parentPanelId;
         return hash;
     }
@@ -56,7 +56,7 @@ public class Sprinkler implements Comparable<Sprinkler> {
             return false;
         }
         final Sprinkler other = (Sprinkler) obj;
-        if (this.id != other.id) {
+        if (this.index != other.index) {
             return false;
         }
         if (this.parentPanelId != other.parentPanelId) {
@@ -67,7 +67,7 @@ public class Sprinkler implements Comparable<Sprinkler> {
 
     @Override
     public String toString() {
-        return "Sprinkler{" + "id=" + id + ", parentPanelId=" + parentPanelId + '}';
+        return "Sprinkler{" + "id=" + index + ", parentPanelId=" + parentPanelId + '}';
     }
 
     public void sprinkle(int time) throws InterruptedException {

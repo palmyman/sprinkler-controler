@@ -30,8 +30,9 @@ public class SprinklerDAO extends DAO {
     private SprinklerDAO() {
         try {
             psCreate = conn.prepareStatement("INSERT INTO SPRINKLER VALUES(DEFAULT, ?, ?, ?, ?)");
+            psDelete = conn.prepareStatement("DELETE FROM SPRINKLER WHERE ID=?");
             psGetAll = conn.prepareStatement("SELECT * FROM SPRINKLER");
-            psGetByProgramId = conn.prepareStatement("SELECT * FROM SPRINKLER WHERE PROGRAM_ID = ?");
+            psGetByProgramId = conn.prepareStatement("SELECT * FROM SPRINKLER WHERE PROGRAM_ID=?");
 
         } catch (SQLException ex) {
             Logger.getLogger(ControlPanelDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -39,11 +40,16 @@ public class SprinklerDAO extends DAO {
     }
     
     public void create(TimedSprinkler sprinkler) throws SQLException {        
-        psCreate.setInt(1, sprinkler.getParentPanelId());
-        psCreate.setInt(2, sprinkler.getParentProgramId());
-        psCreate.setInt(3, sprinkler.getId());
+        psCreate.setInt(1, sprinkler.getParentProgramId());
+        psCreate.setInt(2, sprinkler.getParentPanelId());
+        psCreate.setInt(3, sprinkler.getIndex());
         psCreate.setInt(4, sprinkler.getTime());
         psCreate.execute();
+    }
+    
+    public void delete(int id) throws SQLException {
+        psDelete.setInt(1, id);
+        psDelete.execute();
     }
     
     public Collection<TimedSprinkler> getAll() throws SQLException {
@@ -53,8 +59,9 @@ public class SprinklerDAO extends DAO {
             int id = rs.getInt(1);
             int programId = rs.getInt(2);
             int panelId = rs.getInt(3);
-            int time = rs.getInt(4);            
-            sprinklers.add(new TimedSprinkler(new Sprinkler(id, panelId), programId, time));
+            int index = rs.getInt(4);
+            int time = rs.getInt(5);            
+            sprinklers.add(new TimedSprinkler(new Sprinkler(id, panelId), id, programId, time));
         }
         return sprinklers;
     }
@@ -66,8 +73,9 @@ public class SprinklerDAO extends DAO {
         while (rs.next()) {
             int id = rs.getInt(1);            
             int panelId = rs.getInt(3);
-            int time = rs.getInt(4);            
-            sprinklers.add(new TimedSprinkler(new Sprinkler(id, panelId), programId, time));
+            int index = rs.getInt(4);
+            int time = rs.getInt(5);            
+            sprinklers.add(new TimedSprinkler(new Sprinkler(index, panelId), id, programId, time));
         }
         return sprinklers;
     }

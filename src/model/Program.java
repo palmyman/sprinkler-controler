@@ -54,6 +54,11 @@ public class Program implements Runnable {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public SortedSet<TimedSprinkler> getSprinklers() {
         return sprinklers;
     }    

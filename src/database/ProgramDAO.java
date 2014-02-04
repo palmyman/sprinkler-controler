@@ -29,6 +29,9 @@ public class ProgramDAO extends DAO {
     private ProgramDAO() {
         try {            
             psCreate = conn.prepareStatement("INSERT INTO PROGRAM VALUES(DEFAULT, ?, ?, ?)");
+            psUpdate = conn.prepareStatement("UPDATE PROGRAM SET DATE=?, TIME=? WHERE ID=?");
+            psDelete = conn.prepareStatement("DELETE FROM PROGRAM WHERE ID=?");
+            psDeleteChilds = conn.prepareStatement("DELETE FROM SPRINKLER WHERE PROGRAM_ID=?");
             psGetAll = conn.prepareStatement("SELECT * FROM PROGRAM");            
 
         } catch (SQLException ex) {
@@ -41,6 +44,20 @@ public class ProgramDAO extends DAO {
         psCreate.setDate(2, program.getDate());
         psCreate.setTime(3, program.getTime());
         psCreate.execute();
+    }
+    
+    public void update(Program program) throws SQLException {                
+        psUpdate.setDate(1, program.getDate());
+        psUpdate.setTime(2, program.getTime());
+        psUpdate.setInt(3, program.getId());
+        psUpdate.execute();
+    }
+    
+    public void delete(int id) throws SQLException {                        
+        psDeleteChilds.setInt(1, id);
+        psDeleteChilds.execute();
+        psDelete.setInt(1, id);
+        psDelete.execute();
     }
     
     public Collection<Program> getAll() throws SQLException {

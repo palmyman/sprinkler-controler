@@ -14,22 +14,27 @@ public class ControlPanel implements Comparable<ControlPanel> {
 
     private int id;
     private String name;
-    private String panelIP;
+    private String IP;
     private int sprinklerCount;
 
     public int getSprinklerCount() {
         return sprinklerCount;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public ControlPanel(int id, String name, String host, int sprinklerCount) {
         this.id = id;
         this.name = name;
-        this.panelIP = host;
+        this.IP = host;
         this.sprinklerCount = sprinklerCount;
     }
 
-    public String getPanelIP() {
-        return panelIP;
+    public String getIP() {
+        return IP;
     }
 
     public int getId() {

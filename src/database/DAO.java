@@ -19,14 +19,18 @@ import java.util.logging.Logger;
  * @author palmyman
  */
 public class DAO {
+
     protected Connection conn;
     protected PreparedStatement psCreate;
+    protected PreparedStatement psUpdate;
+    protected PreparedStatement psDelete;
+    protected PreparedStatement psDeleteChilds;
     protected PreparedStatement psGetAll;
     protected PreparedStatement psGetOne;
-    
+
     protected DAO() {
         try {
-            conn = DriverManager.getConnection("jdbc:derby:/tmp/sprinkler;  create=true");
+            conn = DriverManager.getConnection("jdbc:derby:/tmp/sprinkler-controler-db;  create=true");
             DatabaseMetaData md = conn.getMetaData();
             ResultSet programs = md.getTables(null, null, "PROGRAM", null);
             if (!programs.next()) {
@@ -36,25 +40,26 @@ public class DAO {
                         + "	NAME VARCHAR(100),"
                         + "     DATE DATE,"
                         + "     TIME TIME)");
-                s.execute("INSERT INTO PROGRAM VALUES("
-                        + "DEFAULT, 'First', NULL, NULL)");
+                s.execute("INSERT INTO PROGRAM VALUES(DEFAULT, 'First', '1989-07-08', '16:00:00')");
             }
-            
+
             ResultSet sprinklers = md.getTables(null, null, "SPRINKLER", null);
             if (!sprinklers.next()) {
                 Statement s = conn.createStatement();
                 s.executeUpdate("CREATE TABLE SPRINKLER"
                         + "	(ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
-                        + "     PROGRAM_ID INT NOT NULL,"                        
+                        + "     PROGRAM_ID INT NOT NULL,"
                         + "     PANEL_ID INT NOT NULL,"
-                        + "     INDEX INT NOT NULL,"                        
+                        + "     INDEX INT NOT NULL,"
                         + "     DURATION INT NOT NULL)");
                 s.execute("INSERT INTO SPRINKLER VALUES("
                         + "DEFAULT, 1, 1, 1, 20)");
                 s.execute("INSERT INTO SPRINKLER VALUES("
                         + "DEFAULT, 1, 1, 2, 35)");
+                s.execute("INSERT INTO SPRINKLER VALUES("
+                        + "DEFAULT, 1, 2, 1, 15)");
             }
-            
+
             ResultSet panels = md.getTables(null, null, "CONTROL_PANEL", null);
             if (!panels.next()) {
                 Statement s = conn.createStatement();
@@ -65,6 +70,8 @@ public class DAO {
                         + "	SPRINKLER_COUNT INT)");
                 s.execute("INSERT INTO CONTROL_PANEL VALUES("
                         + "DEFAULT, 'Main', '127.0.0.1', 2)");
+                s.execute("INSERT INTO CONTROL_PANEL VALUES("
+                        + "DEFAULT, 'Old Panel', '127.0.0.1', 1)");
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControlPanelDAO.class.getName()).log(Level.SEVERE, null, ex);

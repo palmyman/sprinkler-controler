@@ -9,15 +9,20 @@ package model;
  * @author palmyman
  */
 public class TimedSprinkler extends Sprinkler {
+    private int id;
     private int parentProgramId;
     private int time;    
 
     public int getTime() {
         return time;
     }
-    public TimedSprinkler(Sprinkler sprinkler, int patentProgramId, int time) {        
-        super(sprinkler.id, sprinkler.parentPanelId);
-        if(time < 1) throw new IllegalArgumentException("Time must be int from N.");
+
+    public int getId() {
+        return id;
+    }
+    public TimedSprinkler(Sprinkler sprinkler, int id, int patentProgramId, int time) {        
+        super(sprinkler.index, sprinkler.parentPanelId);        
+        this.id = id;
         this.parentProgramId = patentProgramId;
         this.time = time;        
     }
