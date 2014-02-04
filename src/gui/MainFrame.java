@@ -4,7 +4,12 @@
  */
 package gui;
 
-import java.awt.Dialog;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.DefaultListModel;
+import service.Scheduler;
 
 /**
  *
@@ -12,12 +17,35 @@ import java.awt.Dialog;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    private ProgramTableModel programTableModel;
+    private PanelTableModel panelTableModel;
+    private DefaultListModel logListModel;
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        programTable.setModel(new ProgramTable());
+        programTable.setModel(programTableModel = new ProgramTableModel());
+        panelTable.setModel(panelTableModel = new PanelTableModel());
+        logList.setModel(logListModel = new DefaultListModel());
+        this.addToLog("Program started");
+        new Scheduler(this);
+    }
+
+    public void refreshProgramTable() {
+        this.programTableModel.refresh();
+    }
+
+    public void refreshPanelTable() {
+        this.panelTableModel.refresh();
+    }
+
+    public void addToLog(String text) {
+        Date now = new Date();
+        SimpleDateFormat ft =
+                new SimpleDateFormat("yyyy-MM-dd hh:mm:ss   ");
+        logListModel.addElement(ft.format(now) + text);
     }
 
     /**
@@ -32,9 +60,20 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         programTable = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelTable = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        logList = new javax.swing.JList();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        programMenu = new javax.swing.JMenu();
         newProgram = new javax.swing.JMenuItem();
+        programEditor = new javax.swing.JMenuItem();
+        panelMenu = new javax.swing.JMenu();
+        newPanel = new javax.swing.JMenuItem();
+        panelEditor = new javax.swing.JMenuItem();
+        helpMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sprinkler Controler");
@@ -54,17 +93,72 @@ public class MainFrame extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(programTable);
 
-        jMenu1.setText("Program");
+        jLabel2.setText("Control panels:");
 
-        newProgram.setText("New Program");
+        panelTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(panelTable);
+
+        logList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                logListMouseReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(logList);
+
+        jLabel3.setText("Log:");
+
+        programMenu.setText("Program");
+
+        newProgram.setText("New Program...");
         newProgram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newProgramActionPerformed(evt);
             }
         });
-        jMenu1.add(newProgram);
+        programMenu.add(newProgram);
 
-        jMenuBar1.add(jMenu1);
+        programEditor.setText("Program Editor");
+        programEditor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                programEditorActionPerformed(evt);
+            }
+        });
+        programMenu.add(programEditor);
+
+        jMenuBar1.add(programMenu);
+
+        panelMenu.setText("Panel");
+
+        newPanel.setText("New Panel...");
+        newPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newPanelActionPerformed(evt);
+            }
+        });
+        panelMenu.add(newPanel);
+
+        panelEditor.setText("Panel Editor");
+        panelEditor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                panelEditorActionPerformed(evt);
+            }
+        });
+        panelMenu.add(panelEditor);
+
+        jMenuBar1.add(panelMenu);
+
+        helpMenu.setText("Help");
+        jMenuBar1.add(helpMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -74,19 +168,37 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
         );
 
         pack();
@@ -96,8 +208,57 @@ public class MainFrame extends javax.swing.JFrame {
         NewProgramDialog newProgramDialog = new NewProgramDialog();
         newProgramDialog.setModal(true);
         newProgramDialog.setLocationRelativeTo(this);
-        newProgramDialog.setVisible(true);        
+        newProgramDialog.setVisible(true);
+        newProgramDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                refreshProgramTable();
+            }
+        });
     }//GEN-LAST:event_newProgramActionPerformed
+
+    private void newPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPanelActionPerformed
+        NewPanelDialog newPanelDialog = new NewPanelDialog();
+        newPanelDialog.setModal(true);
+        newPanelDialog.setLocationRelativeTo(this);
+        newPanelDialog.setVisible(true);
+        newPanelDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                refreshPanelTable();
+            }
+        });
+    }//GEN-LAST:event_newPanelActionPerformed
+
+    private void panelEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panelEditorActionPerformed
+        PanelEditorDialog panelEditorDialog = new PanelEditorDialog();
+        panelEditorDialog.setModal(true);
+        panelEditorDialog.setLocationRelativeTo(this);
+        panelEditorDialog.setVisible(true);
+        panelEditorDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                refreshPanelTable();
+            }
+        });
+    }//GEN-LAST:event_panelEditorActionPerformed
+
+    private void programEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programEditorActionPerformed
+        ProgramEditorDialog programEditorDialog = new ProgramEditorDialog();
+        programEditorDialog.setModal(true);
+        programEditorDialog.setLocationRelativeTo(this);
+        programEditorDialog.setVisible(true);
+        programEditorDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                refreshProgramTable();
+            }
+        });
+    }//GEN-LAST:event_programEditorActionPerformed
+
+    private void logListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logListMouseReleased
+        addToLog("You clicked on the log, hi there :)");
+    }//GEN-LAST:event_logListMouseReleased
 
     /**
      * @param args the command line arguments
@@ -135,11 +296,22 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList logList;
+    private javax.swing.JMenuItem newPanel;
     private javax.swing.JMenuItem newProgram;
+    private javax.swing.JMenuItem panelEditor;
+    private javax.swing.JMenu panelMenu;
+    private javax.swing.JTable panelTable;
+    private javax.swing.JMenuItem programEditor;
+    private javax.swing.JMenu programMenu;
     private javax.swing.JTable programTable;
     // End of variables declaration//GEN-END:variables
 }
