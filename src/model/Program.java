@@ -9,8 +9,6 @@ import java.sql.Time;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +21,13 @@ public class Program implements Comparable<Program> {
     private Time time;
     private SortedSet<TimedSprinkler> sprinklers;    
 
+    /**
+     *
+     * @param id
+     * @param name
+     * @param date
+     * @param time
+     */
     public Program(int id, String name, Date date, Time time) {
         this.id = id;
         this.name = name;
@@ -31,22 +36,44 @@ public class Program implements Comparable<Program> {
         this.sprinklers = new TreeSet<>();
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     *
+     * @return
+     */
     public Time getTime() {
         return time;
     }
     
+    /**
+     *
+     * @param item
+     * @return
+     */
     public boolean add(TimedSprinkler item) {
         return this.sprinklers.add(item);        
     }
     
+    /**
+     *
+     * @param item
+     * @return
+     */
     public boolean remove(TimedSprinkler item) {
         return this.sprinklers.remove(item);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
@@ -60,6 +87,11 @@ public class Program implements Comparable<Program> {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     public boolean equals(Program obj) {
         if (obj == null) {
             return false;
@@ -74,6 +106,10 @@ public class Program implements Comparable<Program> {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
@@ -83,14 +119,26 @@ public class Program implements Comparable<Program> {
         return name;
     }
 
+    /**
+     *
+     * @return
+     */
     public SortedSet<TimedSprinkler> getSprinklers() {
         return sprinklers;
     }    
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
     
+    /**
+     *
+     * @throws InterruptedException
+     */
     public void runProgram() throws InterruptedException {
         for (TimedSprinkler sprinkler : this.sprinklers) {
             sprinkler.sprinkle();

@@ -22,11 +22,19 @@ import model.TimedSprinkler;
  *
  * @author palmyman
  */
+
+/**
+ * @Class ProgramDAO - Data access object for Program
+ */
 public class ProgramDAO extends DAO {
 
     private static ProgramDAO instance = new ProgramDAO();
     private static PreparedStatement psGetUpcoming;
 
+    /**
+     * Instance getter
+     * @return instance
+     */
     public static ProgramDAO getInstance() {
         return instance;
     }
@@ -45,6 +53,11 @@ public class ProgramDAO extends DAO {
         }
     }
 
+    /**
+     * Persists new Program
+     * @param program Program to create
+     * @throws SQLException
+     */
     public void create(Program program) throws SQLException {
         psCreate.setString(1, program.getName());
         psCreate.setDate(2, program.getDate());
@@ -52,6 +65,11 @@ public class ProgramDAO extends DAO {
         psCreate.execute();
     }
 
+    /**
+     * Updates Program
+     * @param program Program to update
+     * @throws SQLException
+     */
     public void update(Program program) throws SQLException {
         psUpdate.setDate(1, program.getDate());
         psUpdate.setTime(2, program.getTime());
@@ -59,6 +77,11 @@ public class ProgramDAO extends DAO {
         psUpdate.execute();
     }
 
+    /**
+     * Deletes Program by ID
+     * @param id ID of Program to delete
+     * @throws SQLException
+     */
     public void delete(int id) throws SQLException {
         psDeleteChilds.setInt(1, id);
         psDeleteChilds.execute();
@@ -66,6 +89,11 @@ public class ProgramDAO extends DAO {
         psDelete.execute();
     }
 
+    /**
+     * Gets all Program records from database
+     * @return Set of all Program records from database
+     * @throws SQLException
+     */
     public Set<Program> getAll() throws SQLException {
         ResultSet rs = psGetAll.executeQuery();
         Set<Program> programs = new TreeSet<>();
@@ -85,6 +113,11 @@ public class ProgramDAO extends DAO {
         return programs;
     }
 
+    /**
+     * Gets upcoming Program records from database ordered by time
+     * @return Set of upcoming Program records from database
+     * @throws SQLException
+     */
     public Set<Program> getUpcoming() throws SQLException {
         ResultSet rs = psGetUpcoming.executeQuery();        
         Set<Program> programs = new TreeSet<>();

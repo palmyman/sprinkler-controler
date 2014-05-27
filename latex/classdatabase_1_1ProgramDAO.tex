@@ -1,0 +1,176 @@
+\hypertarget{classdatabase_1_1ProgramDAO}{\section{database.\-Program\-D\-A\-O Class Reference}
+\label{classdatabase_1_1ProgramDAO}\index{database.\-Program\-D\-A\-O@{database.\-Program\-D\-A\-O}}
+}
+
+
+\hyperlink{classdatabase_1_1ProgramDAO}{Program\-D\-A\-O} -\/ Data access object for Program  
+
+
+
+
+Inheritance diagram for database.\-Program\-D\-A\-O\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classdatabase_1_1ProgramDAO__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for database.\-Program\-D\-A\-O\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{classdatabase_1_1ProgramDAO__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classdatabase_1_1ProgramDAO_a4b21d41b6f65f50f0d4bbea82b08b3a4}{create} (\hyperlink{classmodel_1_1Program}{Program} program)  throws S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Persists new Program. \end{DoxyCompactList}\item 
+void \hyperlink{classdatabase_1_1ProgramDAO_a04a0d6682efd0b8de1e4f5a2fb9eff1f}{update} (\hyperlink{classmodel_1_1Program}{Program} program)  throws S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Updates Program. \end{DoxyCompactList}\item 
+void \hyperlink{classdatabase_1_1ProgramDAO_ad8b438f7c667c619c45fc62c6536b0ec}{delete} (int id)  throws S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Deletes Program by I\-D. \end{DoxyCompactList}\item 
+Set$<$ \hyperlink{classmodel_1_1Program}{Program} $>$ \hyperlink{classdatabase_1_1ProgramDAO_af130284e455d83524787ab2671eb0325}{get\-All} ()  throws S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Gets all Program records from database. \end{DoxyCompactList}\item 
+Set$<$ \hyperlink{classmodel_1_1Program}{Program} $>$ \hyperlink{classdatabase_1_1ProgramDAO_a4e35b888111c328029cf2815b95a36a5}{get\-Upcoming} ()  throws S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Gets upcoming Program records from database ordered by time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classdatabase_1_1ProgramDAO}{Program\-D\-A\-O} \hyperlink{classdatabase_1_1ProgramDAO_a9b6c7981aee76613fa22242bee6bcfed}{get\-Instance} ()
+\begin{DoxyCompactList}\small\item\em Instance getter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdatabase_1_1ProgramDAO}{Program\-D\-A\-O} -\/ Data access object for Program 
+
+\begin{DoxyAuthor}{Author}
+palmyman 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classdatabase_1_1ProgramDAO_a4b21d41b6f65f50f0d4bbea82b08b3a4}{\index{database\-::\-Program\-D\-A\-O@{database\-::\-Program\-D\-A\-O}!create@{create}}
+\index{create@{create}!database::ProgramDAO@{database\-::\-Program\-D\-A\-O}}
+\subsubsection[{create}]{\setlength{\rightskip}{0pt plus 5cm}void database.\-Program\-D\-A\-O.\-create (
+\begin{DoxyParamCaption}
+\item[{{\bf Program}}]{program}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classdatabase_1_1ProgramDAO_a4b21d41b6f65f50f0d4bbea82b08b3a4}
+
+
+Persists new Program. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em program} & Program to create \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classdatabase_1_1ProgramDAO_ad8b438f7c667c619c45fc62c6536b0ec}{\index{database\-::\-Program\-D\-A\-O@{database\-::\-Program\-D\-A\-O}!delete@{delete}}
+\index{delete@{delete}!database::ProgramDAO@{database\-::\-Program\-D\-A\-O}}
+\subsubsection[{delete}]{\setlength{\rightskip}{0pt plus 5cm}void database.\-Program\-D\-A\-O.\-delete (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classdatabase_1_1ProgramDAO_ad8b438f7c667c619c45fc62c6536b0ec}
+
+
+Deletes Program by I\-D. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & I\-D of Program to delete \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classdatabase_1_1ProgramDAO_af130284e455d83524787ab2671eb0325}{\index{database\-::\-Program\-D\-A\-O@{database\-::\-Program\-D\-A\-O}!get\-All@{get\-All}}
+\index{get\-All@{get\-All}!database::ProgramDAO@{database\-::\-Program\-D\-A\-O}}
+\subsubsection[{get\-All}]{\setlength{\rightskip}{0pt plus 5cm}Set$<${\bf Program}$>$ database.\-Program\-D\-A\-O.\-get\-All (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classdatabase_1_1ProgramDAO_af130284e455d83524787ab2671eb0325}
+
+
+Gets all Program records from database. 
+
+\begin{DoxyReturn}{Returns}
+Set of all Program records from database 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classdatabase_1_1ProgramDAO_a9b6c7981aee76613fa22242bee6bcfed}{\index{database\-::\-Program\-D\-A\-O@{database\-::\-Program\-D\-A\-O}!get\-Instance@{get\-Instance}}
+\index{get\-Instance@{get\-Instance}!database::ProgramDAO@{database\-::\-Program\-D\-A\-O}}
+\subsubsection[{get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Program\-D\-A\-O} database.\-Program\-D\-A\-O.\-get\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{classdatabase_1_1ProgramDAO_a9b6c7981aee76613fa22242bee6bcfed}
+
+
+Instance getter. 
+
+\begin{DoxyReturn}{Returns}
+instance 
+\end{DoxyReturn}
+\hypertarget{classdatabase_1_1ProgramDAO_a4e35b888111c328029cf2815b95a36a5}{\index{database\-::\-Program\-D\-A\-O@{database\-::\-Program\-D\-A\-O}!get\-Upcoming@{get\-Upcoming}}
+\index{get\-Upcoming@{get\-Upcoming}!database::ProgramDAO@{database\-::\-Program\-D\-A\-O}}
+\subsubsection[{get\-Upcoming}]{\setlength{\rightskip}{0pt plus 5cm}Set$<${\bf Program}$>$ database.\-Program\-D\-A\-O.\-get\-Upcoming (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classdatabase_1_1ProgramDAO_a4e35b888111c328029cf2815b95a36a5}
+
+
+Gets upcoming Program records from database ordered by time. 
+
+\begin{DoxyReturn}{Returns}
+Set of upcoming Program records from database 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classdatabase_1_1ProgramDAO_a04a0d6682efd0b8de1e4f5a2fb9eff1f}{\index{database\-::\-Program\-D\-A\-O@{database\-::\-Program\-D\-A\-O}!update@{update}}
+\index{update@{update}!database::ProgramDAO@{database\-::\-Program\-D\-A\-O}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void database.\-Program\-D\-A\-O.\-update (
+\begin{DoxyParamCaption}
+\item[{{\bf Program}}]{program}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classdatabase_1_1ProgramDAO_a04a0d6682efd0b8de1e4f5a2fb9eff1f}
+
+
+Updates Program. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em program} & Program to update \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/database/Program\-D\-A\-O.\-java\end{DoxyCompactItemize}

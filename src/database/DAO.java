@@ -18,16 +18,53 @@ import java.util.logging.Logger;
  *
  * @author palmyman
  */
+
+/**
+ * @Class DAO - Data access object
+ * @brief This object is used to initialize and work with the database
+ */
 public class DAO {
 
+    /**
+     * Connection to database
+     */
     protected Connection conn;
+
+    /**
+     * Create prepared statement
+     */
     protected PreparedStatement psCreate;
+
+    /**
+     * Update prepared statement
+     */
     protected PreparedStatement psUpdate;
+
+    /**
+     * Delete prepared statement
+     */
     protected PreparedStatement psDelete;
+
+    /**
+     * Delete children prepared statement
+     */
     protected PreparedStatement psDeleteChilds;
+
+    /**
+     * Get all prepared statement
+     */
     protected PreparedStatement psGetAll;
+
+    /**
+     * Get one prepared statement
+     */
     protected PreparedStatement psGetOne;
 
+    /**
+     *  DAO constructor
+     *  @brief Establishes connection to database. If the database is empty, 
+     *  will initialize tables with sample data.
+     */
     protected DAO() {
         try {
             conn = DriverManager.getConnection("jdbc:derby:/tmp/sprinkler-controler-db;  create=true");

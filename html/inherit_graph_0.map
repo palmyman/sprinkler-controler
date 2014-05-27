@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classdatabase_1_1DAO.html" title="DAO &#45; Data access object " alt="" coords="6,56,114,83"/>
+<area shape="rect" id="node2" href="$classdatabase_1_1ControlPanelDAO.html" title="ControlPanelDAO &#45; Data access object for ControlPanel " alt="" coords="163,5,346,32"/>
+<area shape="rect" id="node3" href="$classdatabase_1_1ProgramDAO.html" title="ProgramDAO &#45; Data access object for Program " alt="" coords="176,56,333,83"/>
+<area shape="rect" id="node4" href="$classdatabase_1_1SprinklerDAO.html" title="SprinklerDAO &#45; Data access object for Sprinkler " alt="" coords="175,107,334,133"/>
+</map>

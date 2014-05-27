@@ -1,0 +1,3 @@
+<map id="model.Sprinkler" name="model.Sprinkler">
+<area shape="rect" id="node3" href="$classmodel_1_1TimedSprinkler.html" title="{model.TimedSprinkler\n||+ getTime()\l+ getId()\l+ TimedSprinkler()\l+ sprinkle()\l+ getParentProgramId()\l}" alt="" coords="9,389,167,525"/>
+</map>

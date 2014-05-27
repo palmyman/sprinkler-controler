@@ -18,11 +18,19 @@ import model.TimedSprinkler;
  *
  * @author palmyman
  */
+
+/**
+ * @Class SprinklerDAO - Data access object for Sprinkler
+ */
 public class SprinklerDAO extends DAO {
     private PreparedStatement psGetByProgramId;
     
     private static SprinklerDAO instance = new SprinklerDAO();
     
+    /**
+     * Instance getter
+     * @return instance
+     */
     public static SprinklerDAO getInstance() {
         return instance;
     }
@@ -39,6 +47,11 @@ public class SprinklerDAO extends DAO {
         }
     }
     
+    /**
+     * Persists new TimedSprinkler
+     * @param sprinkler TimedSprinkler to persist
+     * @throws SQLException
+     */
     public void create(TimedSprinkler sprinkler) throws SQLException {        
         psCreate.setInt(1, sprinkler.getParentProgramId());
         psCreate.setInt(2, sprinkler.getParentPanelId());
@@ -47,11 +60,21 @@ public class SprinklerDAO extends DAO {
         psCreate.execute();
     }
     
+    /**
+     * Deletes TimedSprinkler from database by ID
+     * @param id ID of TimedSprinkler to delete
+     * @throws SQLException
+     */
     public void delete(int id) throws SQLException {
         psDelete.setInt(1, id);
         psDelete.execute();
     }
     
+    /**
+     * Gets all TimedSprinklers from database
+     * @return Set of all TimedSprinklers
+     * @throws SQLException
+     */
     public Set<TimedSprinkler> getAll() throws SQLException {
         ResultSet rs = psGetAll.executeQuery();
         Set<TimedSprinkler> sprinklers = new TreeSet<>();
@@ -66,6 +89,12 @@ public class SprinklerDAO extends DAO {
         return sprinklers;
     }
     
+    /**
+     * Gets TimedSprinklers by Program ID
+     * @param programId ID of planed Program
+     * @return Set of TimedSprinklers planed in Program
+     * @throws SQLException
+     */
     public Set<TimedSprinkler> getByProgramId(int programId) throws SQLException {
         psGetByProgramId.setInt(1, programId);
         ResultSet rs = psGetByProgramId.executeQuery();

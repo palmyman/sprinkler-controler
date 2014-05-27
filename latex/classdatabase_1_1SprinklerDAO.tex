@@ -1,0 +1,158 @@
+\hypertarget{classdatabase_1_1SprinklerDAO}{\section{database.\-Sprinkler\-D\-A\-O Class Reference}
+\label{classdatabase_1_1SprinklerDAO}\index{database.\-Sprinkler\-D\-A\-O@{database.\-Sprinkler\-D\-A\-O}}
+}
+
+
+\hyperlink{classdatabase_1_1SprinklerDAO}{Sprinkler\-D\-A\-O} -\/ Data access object for Sprinkler  
+
+
+
+
+Inheritance diagram for database.\-Sprinkler\-D\-A\-O\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classdatabase_1_1SprinklerDAO__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for database.\-Sprinkler\-D\-A\-O\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{classdatabase_1_1SprinklerDAO__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classdatabase_1_1SprinklerDAO_aa36660d2b73caa79fa7ad6f85cdf5d73}{create} (\hyperlink{classmodel_1_1TimedSprinkler}{Timed\-Sprinkler} sprinkler)  throws S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Persists new Timed\-Sprinkler. \end{DoxyCompactList}\item 
+void \hyperlink{classdatabase_1_1SprinklerDAO_a9fa3398276c78b71f4e35a54085515c7}{delete} (int id)  throws S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Deletes Timed\-Sprinkler from database by I\-D. \end{DoxyCompactList}\item 
+Set$<$ \hyperlink{classmodel_1_1TimedSprinkler}{Timed\-Sprinkler} $>$ \hyperlink{classdatabase_1_1SprinklerDAO_ada482a94d720543499345f7431665875}{get\-All} ()  throws S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Gets all Timed\-Sprinklers from database. \end{DoxyCompactList}\item 
+Set$<$ \hyperlink{classmodel_1_1TimedSprinkler}{Timed\-Sprinkler} $>$ \hyperlink{classdatabase_1_1SprinklerDAO_a89a1aee06da7613937d4f2b8b482d65f}{get\-By\-Program\-Id} (int program\-Id)  throws S\-Q\-L\-Exception 
+\begin{DoxyCompactList}\small\item\em Gets Timed\-Sprinklers by Program I\-D. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classdatabase_1_1SprinklerDAO}{Sprinkler\-D\-A\-O} \hyperlink{classdatabase_1_1SprinklerDAO_a1437d73a7864607e52b923af135227d0}{get\-Instance} ()
+\begin{DoxyCompactList}\small\item\em Instance getter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdatabase_1_1SprinklerDAO}{Sprinkler\-D\-A\-O} -\/ Data access object for Sprinkler 
+
+\begin{DoxyAuthor}{Author}
+palmyman 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classdatabase_1_1SprinklerDAO_aa36660d2b73caa79fa7ad6f85cdf5d73}{\index{database\-::\-Sprinkler\-D\-A\-O@{database\-::\-Sprinkler\-D\-A\-O}!create@{create}}
+\index{create@{create}!database::SprinklerDAO@{database\-::\-Sprinkler\-D\-A\-O}}
+\subsubsection[{create}]{\setlength{\rightskip}{0pt plus 5cm}void database.\-Sprinkler\-D\-A\-O.\-create (
+\begin{DoxyParamCaption}
+\item[{{\bf Timed\-Sprinkler}}]{sprinkler}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classdatabase_1_1SprinklerDAO_aa36660d2b73caa79fa7ad6f85cdf5d73}
+
+
+Persists new Timed\-Sprinkler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprinkler} & Timed\-Sprinkler to persist \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classdatabase_1_1SprinklerDAO_a9fa3398276c78b71f4e35a54085515c7}{\index{database\-::\-Sprinkler\-D\-A\-O@{database\-::\-Sprinkler\-D\-A\-O}!delete@{delete}}
+\index{delete@{delete}!database::SprinklerDAO@{database\-::\-Sprinkler\-D\-A\-O}}
+\subsubsection[{delete}]{\setlength{\rightskip}{0pt plus 5cm}void database.\-Sprinkler\-D\-A\-O.\-delete (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classdatabase_1_1SprinklerDAO_a9fa3398276c78b71f4e35a54085515c7}
+
+
+Deletes Timed\-Sprinkler from database by I\-D. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & I\-D of Timed\-Sprinkler to delete \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classdatabase_1_1SprinklerDAO_ada482a94d720543499345f7431665875}{\index{database\-::\-Sprinkler\-D\-A\-O@{database\-::\-Sprinkler\-D\-A\-O}!get\-All@{get\-All}}
+\index{get\-All@{get\-All}!database::SprinklerDAO@{database\-::\-Sprinkler\-D\-A\-O}}
+\subsubsection[{get\-All}]{\setlength{\rightskip}{0pt plus 5cm}Set$<${\bf Timed\-Sprinkler}$>$ database.\-Sprinkler\-D\-A\-O.\-get\-All (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classdatabase_1_1SprinklerDAO_ada482a94d720543499345f7431665875}
+
+
+Gets all Timed\-Sprinklers from database. 
+
+\begin{DoxyReturn}{Returns}
+Set of all Timed\-Sprinklers 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classdatabase_1_1SprinklerDAO_a89a1aee06da7613937d4f2b8b482d65f}{\index{database\-::\-Sprinkler\-D\-A\-O@{database\-::\-Sprinkler\-D\-A\-O}!get\-By\-Program\-Id@{get\-By\-Program\-Id}}
+\index{get\-By\-Program\-Id@{get\-By\-Program\-Id}!database::SprinklerDAO@{database\-::\-Sprinkler\-D\-A\-O}}
+\subsubsection[{get\-By\-Program\-Id}]{\setlength{\rightskip}{0pt plus 5cm}Set$<${\bf Timed\-Sprinkler}$>$ database.\-Sprinkler\-D\-A\-O.\-get\-By\-Program\-Id (
+\begin{DoxyParamCaption}
+\item[{int}]{program\-Id}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception\hspace{0.3cm}{\ttfamily [inline]}}}\label{classdatabase_1_1SprinklerDAO_a89a1aee06da7613937d4f2b8b482d65f}
+
+
+Gets Timed\-Sprinklers by Program I\-D. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em program\-Id} & I\-D of planed Program \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Set of Timed\-Sprinklers planed in Program 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classdatabase_1_1SprinklerDAO_a1437d73a7864607e52b923af135227d0}{\index{database\-::\-Sprinkler\-D\-A\-O@{database\-::\-Sprinkler\-D\-A\-O}!get\-Instance@{get\-Instance}}
+\index{get\-Instance@{get\-Instance}!database::SprinklerDAO@{database\-::\-Sprinkler\-D\-A\-O}}
+\subsubsection[{get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Sprinkler\-D\-A\-O} database.\-Sprinkler\-D\-A\-O.\-get\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{classdatabase_1_1SprinklerDAO_a1437d73a7864607e52b923af135227d0}
+
+
+Instance getter. 
+
+\begin{DoxyReturn}{Returns}
+instance 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/database/Sprinkler\-D\-A\-O.\-java\end{DoxyCompactItemize}

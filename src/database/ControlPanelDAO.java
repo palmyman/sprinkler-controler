@@ -17,10 +17,18 @@ import java.util.logging.Logger;
  *
  * @author palmyman
  */
+
+/**
+ * @Class ControlPanelDAO - Data access object for ControlPanel 
+ */
 public class ControlPanelDAO extends DAO {
 
-    private static ControlPanelDAO instance = new ControlPanelDAO();    
+    private static final ControlPanelDAO instance = new ControlPanelDAO();    
 
+    /**
+     * Instance getter
+     * @return instance
+     */
     public static ControlPanelDAO getInstance() {
         return instance;
     }
@@ -38,6 +46,11 @@ public class ControlPanelDAO extends DAO {
         }
     }
 
+    /**
+     * Persists new ControlPanel
+     * @param panel ControlPanel to persist
+     * @throws SQLException
+     */
     public void create(ControlPanel panel) throws SQLException {
         psCreate.setString(1, panel.getName());
         psCreate.setString(2, panel.getIP());
@@ -45,6 +58,11 @@ public class ControlPanelDAO extends DAO {
         psCreate.execute();
     }
     
+    /**
+     * Updates ControlPanel
+     * @param panel ControlPanel to update
+     * @throws SQLException
+     */
     public void update(ControlPanel panel) throws SQLException {
         psUpdate.setString(1, panel.getName());
         psUpdate.setString(2, panel.getIP());
@@ -53,6 +71,11 @@ public class ControlPanelDAO extends DAO {
         psUpdate.execute();
     }
     
+    /**
+     * Deletes ControlPanel
+     * @param panel ControlPanel to delete
+     * @throws SQLException
+     */
     public void delete(ControlPanel panel) throws SQLException {
         psDeleteChilds.setInt(1, panel.getId());
         psDeleteChilds.execute();
@@ -60,6 +83,11 @@ public class ControlPanelDAO extends DAO {
         psDelete.execute();
     }
 
+    /**
+     * Gets all ControlPanel records from database
+     * @return Set of all ControlPanels from database
+     * @throws SQLException
+     */
     public Collection<ControlPanel> getAll() throws SQLException {
         ResultSet rs = psGetAll.executeQuery();
         Set<ControlPanel> panels = new TreeSet<>();
@@ -73,6 +101,12 @@ public class ControlPanelDAO extends DAO {
         return panels;
     }
 
+    /**
+     * Gets one ControlPanel from database by ID
+     * @param id ID of ControlPanel
+     * @return ControlPanel if found, else returns null
+     * @throws SQLException
+     */
     public ControlPanel getOne(int id) throws SQLException {
         psGetOne.setInt(1, id);
         ResultSet rs = psGetOne.executeQuery();

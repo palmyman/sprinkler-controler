@@ -17,6 +17,10 @@ public class ControlPanel implements Comparable<ControlPanel> {
     private String IP;
     private int sprinklerCount;
 
+    /**
+     * Gets count of Sprinklers
+     * @return count of Sprinklers
+     */
     public int getSprinklerCount() {
         return sprinklerCount;
     }
@@ -26,6 +30,13 @@ public class ControlPanel implements Comparable<ControlPanel> {
         return name;
     }
 
+    /**
+     * 
+     * @param id
+     * @param name
+     * @param host
+     * @param sprinklerCount
+     */
     public ControlPanel(int id, String name, String host, int sprinklerCount) {
         this.id = id;
         this.name = name;
@@ -33,14 +44,26 @@ public class ControlPanel implements Comparable<ControlPanel> {
         this.sprinklerCount = sprinklerCount;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIP() {
         return IP;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }

@@ -10,14 +10,30 @@ package model;
  */
 public class Sprinkler implements Comparable<Sprinkler> {
 
+    /**
+     *
+     */
     protected int index;
+
+    /**
+     *
+     */
     protected int parentPanelId;
 
+    /**
+     *
+     * @param index
+     * @param parentPanelId
+     */
     public Sprinkler(int index, int parentPanelId) {
         this.index = index;
         this.parentPanelId = parentPanelId;        
     }
 
+    /**
+     *
+     * @return
+     */
     public int getParentPanelId() {
         return parentPanelId;
     }
@@ -31,10 +47,18 @@ public class Sprinkler implements Comparable<Sprinkler> {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public ControlPanel getParentPanel() {        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIndex() {
         return index;
     }
@@ -70,6 +94,11 @@ public class Sprinkler implements Comparable<Sprinkler> {
         return "Sprinkler{" + "id=" + index + ", parentPanelId=" + parentPanelId + '}';
     }
 
+    /**
+     *
+     * @param duration
+     * @throws InterruptedException
+     */
     public void sprinkle(int duration) throws InterruptedException {                       
         Thread.sleep(duration * 1000);
     }
